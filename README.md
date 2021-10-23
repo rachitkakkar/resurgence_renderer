@@ -36,9 +36,9 @@ while True:
 ```
 
 # ROAD MAP (NO PARTICULAR ORDER):
--Add reflections
--Add cones, planes, cubes, ect.
--Add triangles and loading from obj files
--Convert to C
--Multiprocessing
--Add Lua bindings
+Add reflections
+Add cones, planes, cubes, ect.
+Add triangles and loading from obj files
+Convert to C
+Multiprocessing
+Add Lua bindings
