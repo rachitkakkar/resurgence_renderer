@@ -1,18 +1,18 @@
-#DISCALIMER
+# DISCALIMER
 This is a python pygame library I made for raytracing a long time ago. It never evolved to reach my offical goals, and I gave up on it after a while. I have decided to put the code up because it taught me a lot about raytracing, and I hope it can help others too.
 The original readme I made for this project can be found below:
 
-#HELP
+# HELP
 **DOCS CAN BE FOUND IN docs/docs.text**
 
-#About
+# About
 resurgence_renderer is a simple to use **3D render**, that can be easily extended using **python**.
 The render uses **raytracing** to render 3D, and uses **pygame** for the window and displaying of the final image.
 The render is lightweight and easy to use, however since it uses raytracing, it can be **quite slow**.
 This is only in **beta** and right now only has the ability to render spheres.
 This project is licensed under the **MIT License** and was made by **Rachit Kakkar**.
 
-#**ROAD MAP (NO PARTICULAR ORDER):**
+# ROAD MAP (NO PARTICULAR ORDER):
 -Add reflections
 -Add cones, planes, cubes, ect.
 -Add triangles and loading from obj files
@@ -20,7 +20,7 @@ This project is licensed under the **MIT License** and was made by **Rachit Kakk
 -Multiprocessing
 -Add Lua bindings
 
-#Examples
+# Examples
 **Examples can be found in the examples folder**
 **The images from those examples can be found in the images folder**
 
