@@ -14,7 +14,7 @@ This project is licensed under the **MIT License** and was made by **Rachit Kakk
 **DOCS CAN BE FOUND IN docs/docs.text**
 
 # Examples
-**Examples can be found in the examples folder**
+**Examples can be found in the examples folder** \
 **The images from those examples can be found in the images folder**
 
 This is an example output (can be found under images/output.png):
