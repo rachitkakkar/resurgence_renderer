@@ -1,14 +1,16 @@
-# DISCLAIMER
-This is a python pygame library I made for raytracing a long time ago. It never evolved to reach my offical goals, and I gave up on it after a while. I have decided to put the code up because it taught me a lot about raytracing, and I hope it can help others too.\
-\
-The original readme I made for this project can be found below:
-
 # About
-resurgence_renderer is a simple to use **3D render**, that can be easily extended using **python**.
-The render uses **raytracing** to render 3D, and uses **pygame** for the window and displaying of the final image.
-The render is lightweight and easy to use, however since it uses raytracing, it can be **quite slow**.
+resurgence_renderer is a simple to use **3D renderer**, that can be easily extended using **python**.
+The renderer is powered by **raytracing**, and **pygame** is utilized for the window and displaying of the final image.
+The render is lightweight and easy to use, although it can be **quite slow**.
 This is only in **beta** and right now only has the ability to render spheres.
-This project is licensed under the **MIT License** and was made by **Rachit Kakkar**.
+This project is licensed under the **MIT License** and authored by **Rachit Kakkar**.
+
+My process to create it, as well as an explanation of how it works, can be found at the following blog post: https://rachitkakkar.github.io/projects/my-python-raytracer/
+
+![Showcase](images/showcase1.png)
+![Showcase](images/showcase2.png)
+![Showcase](images/showcase3.png)
+The code for generating similar images can also be found in the above blog post.
 
 # HELP
 **DOCS CAN BE FOUND IN docs/docs.text**
