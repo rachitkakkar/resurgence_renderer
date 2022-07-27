@@ -1,4 +1,3 @@
-# About
 resurgence_renderer is a simple to use **3D renderer**, that can be easily extended using **python**.
 The renderer is powered by **raytracing**, and **pygame** is utilized for the window and displaying of the final image.
 The render is lightweight and easy to use, although it can be **quite slow**.
@@ -10,6 +9,7 @@ My process to create it, as well as an explanation of how it works, can be found
 ![Showcase](images/showcase1.png)
 ![Showcase](images/showcase2.png)
 ![Showcase](images/showcase3.png)
+
 The code for generating similar images can also be found in the above blog post.
 
 # HELP
