@@ -37,11 +37,3 @@ scene.ray_trace()
 while True:
     scene.update()
 ```
-
-# ROAD MAP (NO PARTICULAR ORDER):
-* Add reflections
-* Add cones, planes, cubes, ect.
-* Add triangles and loading from obj files
-* Convert to C
-* Multiprocessing
-* Add Lua bindings
