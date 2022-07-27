@@ -15,7 +15,7 @@ My process to create it, as well as an explanation of how it works, can be found
 The code for generating similar images can also be found in the above blog post.
 
 # Help
-**DOCS CAN BE FOUND IN docs/docs.text**
+Documentation can be found in docs/docs.text
 
 # Examples
 **Examples can be found in the examples folder** \
