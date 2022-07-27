@@ -1,15 +1,7 @@
 This documentation shows the properties and methods of everything you will need to use. 
 Many methods are for internal use only.
 
-**MAKE SURE TO READ THE README**
-
-**ROAD MAP (NO PARTICULAR ORDER)**:
--Add reflections
--Add cones, planes, cubes, ect.
--Add triangles and loading from obj files`
--Convert to C
--Multiprocessing
--Add Lua bindings
+MAKE SURE TO READ THE README
 
 Examples can be found in the examples folder
 The images from those examples can be found in the images folder
