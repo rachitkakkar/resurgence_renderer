@@ -1,7 +1,7 @@
 # resurgence_renderer
 resurgence_renderer is a simple to use **3D renderer**, that can be easily extended using **python**.
 The renderer is powered by **raytracing**, and **pygame** is utilized for the window and displaying of the final image.
-The render is lightweight and easy to use, although it can be **quite slow**.
+It is quite lightweight and easy to use, although it can be **quite slow**.
 I created it as a basic project to learn raytracing, and right now only has the ability to render spheres.
 This project is licensed under the **MIT License** and authored by **Rachit Kakkar**.
 
