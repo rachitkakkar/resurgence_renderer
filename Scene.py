@@ -76,8 +76,3 @@ class Scene:
                 pixel_color = Vector3(pixel_color.x / 4, pixel_color.y / 4, pixel_color.z / 4)
                 
                 pygame.gfxdraw.pixel(self.screen, x, y, pixel_color.to_color().to_tuple())
-
-
-                        
-
-
