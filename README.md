@@ -1,4 +1,12 @@
-# resurgence_renderer
+<div align="center">
+    <h1>resurgence_renderer</h1>
+    <blockquote>
+        A python pygame library I made for raytracing a long time ago.
+    </blockquote>
+</div>
+
+![Showcase](images/showcase1.png)
+
 resurgence_renderer is a simple to use 3D renderer that can be easily extended using python.
 The renderer is powered by raytracing, and pygame is utilized for the window and displaying of the final image.
 It is quite lightweight and easy to use, although it can be quite slow.
