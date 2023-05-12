@@ -1,7 +1,7 @@
 <div align="center">
     <h1>resurgence_renderer</h1>
     <blockquote>
-        A python pygame library I made for raytracing a long time ago.
+        A python pygame library I made for raytracing a long time ago as a school project.
     </blockquote>
     <img src="images/showcase1.png" alt="Showcase" width="45%" align="left" />
     <img src="images/showcase2.png" alt="Showcase" width="45%" /> 
