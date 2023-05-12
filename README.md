@@ -15,10 +15,9 @@ This project is licensed under the MIT License and authored by Rachit Kakkar.
 
 My process to create it, as well as an explanation of how it works, can be found at the following blog post: https://rachitkakkar.github.io/projects/my-python-raytracer/
 
-# Demonstration
-![Showcase](images/showcase1.png)
-![Showcase](images/showcase2.png)
-![Showcase](images/showcase3.png)
+# Further Demonstration
+<img src="images/showcase3.png" alt="Showcase" width="45%" align="left" />
+<img src="images/showcase4.png" alt="Showcase" width="45%" /> 
 
 The code for generating similar images can also be found in the above blog post.
 
