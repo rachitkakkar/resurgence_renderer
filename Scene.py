@@ -1,32 +1,32 @@
-import pygame #Library to create window
-import pygame.gfxdraw #Needed to draw pixels
+import pygame # Library to create window
+import pygame.gfxdraw # Needed to draw pixels
 
-from .Vector3 import Vector3 #See Vector3 class
-from .Ray import Ray #See Ray class
+from .Vector3 import Vector3 # See Vector3 class
+from .Ray import Ray # See Ray class
 
 class Scene:
     def __init__(self, width, height, title, max_distance, camera, objects, lights):
-        #Width, height, and title
+        # Width, height, and title
         self.width = width
         self.height = height
         self.title = title
 
-        self.max_distance = max_distance #If objects are further than max distance, they will be ignored
-        self.camera = camera #Position of camera (a Vector3)
-        self.objects = objects #Objects 
+        self.max_distance = max_distance # If objects are further than max distance, they will be ignored
+        self.camera = camera # Position of camera (a Vector3)
+        self.objects = objects # Objects 
 
-        for object_ in self.objects: #Offsetting objects by camera
+        for object_ in self.objects: # Offsetting objects by camera
             object_ = object_.add_camera(self.camera)
 
-        self.lights = lights #Light positions
+        self.lights = lights # Light positions
 
-        pygame.init() #Initialize pygame
+        pygame.init() # Initialize pygame
 
-        #Set up window
+        # Set up window
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption(self.title)
 
-    def update(self): #Handle quitting window and update screen
+    def update(self): # Handle quitting window and update screen
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -34,16 +34,16 @@ class Scene:
 
         pygame.display.flip()
 
-    def ray_trace(self): #Ray trace
+    def ray_trace(self): # Ray trace
         for x in range(self.width):
-            for y in range(self.height): #Loop over pixels
-                pixel_color = Vector3(0, 0, 0) #Set pixel color to black
-                colors = [] #Will be the 4 colours we take the average of (anti-aliasing)
+            for y in range(self.height): # Loop over pixels
+                pixel_color = Vector3(0, 0, 0) # Set pixel color to black
+                colors = [] # Will be the 4 colours we take the average of (anti-aliasing)
                 rays = [Ray(Vector3(x, y, 0), Vector3(0, 0, 1)), Ray(Vector3(x + 0.25, y, 0), Vector3(0, 0, 1)), Ray(Vector3(x, y + 0.25, 0), Vector3(0, 0, 1)), Ray(Vector3(x + 0.25, y + 0.25, 0), Vector3(0, 0, 1))] #Four rays for pixel, then take the average of those four colors (anti-aliasing)
 
-                distance = self.max_distance #Distance that the closest object is. Starts at max distance.
-                selected_object = None #The selected object
-                object_hit = False #Determines if object is hit
+                distance = self.max_distance # Distance that the closest object is. Starts at max distance.
+                selected_object = None # The selected object
+                object_hit = False # Determines if object is hit
 
                 for ray in rays:
                     for object_ in self.objects:
