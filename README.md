@@ -4,8 +4,8 @@
         A python pygame library I made for raytracing a long time ago.
     </blockquote>
 </div>
-<img src="images/showcase1.png" alt="Showcase" width="50%" />
-<img src="images/showcase2.png" alt="Showcase" width="50%" /> 
+<img src="images/showcase1.png" alt="Showcase" width="40%" style="display: inline;"/>
+<img src="images/showcase2.png" alt="Showcase" width="40%" style="display: inline;"/> 
 
 <style>
 img {
