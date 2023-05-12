@@ -9,7 +9,7 @@
 
 <style>
 img {
-    display : inline; 
+    display: inline; 
 }
 </style>
 
