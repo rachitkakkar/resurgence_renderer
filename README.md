@@ -5,7 +5,7 @@
     </blockquote>
 </div>
 <img src="images/showcase1.png" alt="Showcase" width="40%" align="left" />
-<img src="images/showcase2.png" alt="Showcase" width="40%" align="left" /> 
+<img src="images/showcase2.png" alt="Showcase" width="40%" /> 
 
 <style>
 img {
