@@ -1,48 +1,28 @@
 <div align="center">
-    <h1>resurgence_renderer</h1>
+    <h1>RachitTracer</h1>
     <blockquote>
-        A python pygame library I made for raytracing a long time ago as a school project.
+        A pathtracer fully written in pure C++ and SDL
     </blockquote>
-    <img src="images/showcase1.png" alt="Showcase" width="45%" align="left" />
-    <img src="images/showcase2.png" alt="Showcase" width="45%" /> 
 </div>
 
-resurgence_renderer is a simple to use 3D renderer that can be easily extended using python.
-The renderer is powered by raytracing, and pygame is utilized for the window and displaying of the final image.
-It is quite lightweight and easy to use, although it can be quite slow.
-I created it as a basic project to learn raytracing, and right now only has the ability to render spheres.
-This project is licensed under the MIT License and authored by Rachit Kakkar.
+# Status
+MAJOR WORK IN PROGRESS
 
-My process to create it, as well as an explanation of how it works, can be found at the following blog post: https://rachitkakkar.github.io/projects/my-python-raytracer/
+![Example Render](render.png)
 
-# Further Demonstration
-<img src="images/showcase3.png" alt="Showcase" width="45%" align="left" />
-<img src="images/showcase4.png" alt="Showcase" width="45%" /> 
+# About
+This project is meant to be a fully featured pathtracer based of the book *Raytracing in One Weekend*. It was originally started as an improvement to a python raytracing library I made a long time ago in middle school (called `resurgence_renderer`). The code for this older version can be found in the `Version 1` directory.
 
-The code for generating similar images can also be found in the above blog post.
+# Getting Started
+Only requirement is g++ (or another C++ compiler) and SDL2 (with SDL_image). Because of my choice of language and libraries, it is decently portable.
 
-# Help
-Documentation can be found in docs/docs.text
+*Steps tested on MacOS*
+- Clone the repository to your desired directory.
+- To compile, run: `make`
+- To run the program, use the `RachitTracer` executable in `bin`, passing in an argument for the output file path:
+    - Example: `./bin/RachitTracer render.png`
+        - An image of the render will be written to the specified file and displayed on an SDL window (for easy viewing).
+- To clean, run: `make clean`
 
-# Examples
-**Examples can be found in the examples folder** \
-**The images from those examples can be found in the images folder**
-
-This is an example output (can be found under images/output.png):
-![Example Output](images/output.png)
-
-This is the code used to generate the output (can be found under examples/output.pyw):
-
-```python
-from resurgence_renderer import Sphere, Vector3, Light, Scene
-
-objects = [Sphere(Vector3(250, 250, 150), 120, Vector3(255, 255, 0), 0.5, 0.0001, 0.7)]
-lights = [Light(Vector3(250, 250, -200), Vector3(255, 255, 255))]
-camera = Vector3(0, 0, 0)
-
-scene = Scene(500, 500, "Demo", 1000, camera, objects, lights)
-scene.ray_trace()
-
-while True:
-    scene.update()
-```
+# Credits
+Much of the work here is based of Peter Shirley's amazing book: *Raytracing in One Weekend*

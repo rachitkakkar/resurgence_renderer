@@ -1,3 +1,4 @@
+# This probably doesn't work
 import setuptools
 
 with open("README.md", "r") as fh:

@@ -34,7 +34,7 @@ class Vector3:  # Vector3 Class
     def negative(self):  # Multiply x, y, and z by -1
         return Vector3(self.x * -1, self.y * -1, self.z * -1)
 
-    def to_color(self):  # Formatting to and rgb color
+    def to_color(self):  # Formatting to an rgb color
         r = int(self.x)
         b = int(self.y)
         g = int(self.z)
