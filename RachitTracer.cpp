@@ -14,8 +14,10 @@
 
 #include "Vector.hpp"
 #include "Ray.hpp"
+#include "Camera.hpp"
 #include "Objects.hpp"
 #include "Scene.hpp"
+#include "Utilities.hpp"
 
 // Function to clear the screen based on the operating system
 void clearScreen() {
@@ -28,7 +30,7 @@ void clearScreen() {
 #endif
 }
 
-// Function to create a progress bar given current progress (based on the ratio of progess / total) and elapsed seconds
+// Function to create a progress bar given current progress (based on the ratio of progress / total) and elapsed seconds
 void updateProgressBar(int progress, int total, double elapsedSeconds) 
 {
     const int barWidth = 50;
@@ -73,18 +75,13 @@ int main(int argc, char* argv[])
     const int imageWidth = 1000;
     const int imageHeight = (int)(imageWidth / aspectRatio);
     std::string imageName = argv[1];
+
     unsigned char pixels[imageWidth * imageHeight * 3];
-    int pixel_index = 0;
+    const int samplesPerPixel = 500;
+    int pixelIndex = 0;
     
     // Camera
-    float viewportHeight = 2.0f;
-    float viewportWidth = aspectRatio * viewportHeight;
-    float focalLength = 1.0f;
-
-    Vector3 origin = Vector3();
-    Vector3 horizontal = Vector3(viewportWidth, 0, 0);
-    Vector3 vertical = Vector3(0, viewportHeight, 0);
-    Vector3 lowerLeftCorner = origin - horizontal/2 - vertical/2 - Vector3(0, 0, focalLength);
+    Camera camera(aspectRatio);
 
     // World
     Scene world;
@@ -100,12 +97,24 @@ int main(int argc, char* argv[])
         for (int i = 0; i < imageWidth; i++) {
             double u = (double)i / (imageWidth-1);
             double v = (double)j / (imageHeight-1);
-            Ray ray(origin, lowerLeftCorner + u * horizontal + v * vertical - origin);
-            Vector3 color = rayColor(ray, world);
 
-            pixels[pixel_index++] = (unsigned char)(color.x * 255.999);
-            pixels[pixel_index++] = (unsigned char)(color.y * 255.999);
-            pixels[pixel_index++] = (unsigned char)(color.z * 255.999);
+            Vector3 color;
+            for (int s = 0; s < samplesPerPixel; s++) {
+                double u = ((double)i + randomDouble())  / (imageWidth-1);
+                double v = ((double)j + randomDouble())  / (imageHeight-1);
+                
+                Ray ray = camera.getRay(u, v);
+                color = color + rayColor(ray, world);
+            }
+
+            double scale = 1.0 / samplesPerPixel;
+            double r = color.x * scale;
+            double g = color.y * scale;
+            double b = color.z * scale;
+
+            pixels[pixelIndex++] = (unsigned char)(256 * clamp(r, 0.0, 0.999));
+            pixels[pixelIndex++] = (unsigned char)(256 * clamp(g, 0.0, 0.999));
+            pixels[pixelIndex++] = (unsigned char)(256 * clamp(b, 0.0, 0.999));
         }
     }
     
