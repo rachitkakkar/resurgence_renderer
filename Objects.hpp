@@ -1,6 +1,7 @@
 #ifndef OBJECT
 #define OBJECT
 
+#include "Interval.hpp"
 #include "Vector.hpp"
 #include "Ray.hpp"
 
@@ -20,7 +21,7 @@ struct Hit {
 
 class Object {
 public:
-    virtual Hit hit (const Ray& ray, double tMin, double tMax) const = 0;
+    virtual Hit hit (const Ray& ray, Interval rayT) const = 0;
 };
 
 class Sphere : public Object {
@@ -31,7 +32,7 @@ public:
     Sphere() {}
     Sphere(Vector3 c, double r) : center(c), radius(r) {};
 
-    virtual Hit hit(const Ray& ray, double tMin, double tMax) const override {
+    virtual Hit hit(const Ray& ray, Interval rayT) const override {
         Hit hit;
 
         Vector3 sphereToRay = ray.origin - center;
@@ -46,10 +47,11 @@ public:
 
         // Find the nearest root that lies in the acceptable range.
         double root = (-half_b - sqrtd) / a;
-        if (root < tMin || tMax < root) {
+        if (!rayT.surrounds(root)) {
             root = (-half_b + sqrtd) / a;
-            if (root < tMin || tMax < root)
+            if (!rayT.surrounds(root)) {
                 return hit;
+            }
         }
 
         hit.t = root;

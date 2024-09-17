@@ -19,13 +19,13 @@ public:
         objects.push_back(object);
     }
 
-    Hit hit(const Ray& ray, double tMin, double tMax) const {
+    Hit hit(const Ray& ray, Interval rayT) const {
         Hit hit;
         hit.occured = false;
-        double closestObjectSoFar = tMax;
+        double closestObjectSoFar = rayT.max;
 
         for (const auto& object : objects) {
-            Hit objectHit = object->hit(ray, tMin, closestObjectSoFar);
+            Hit objectHit = object->hit(ray, Interval(rayT.min, closestObjectSoFar));
             if (objectHit.occured) {
                 closestObjectSoFar = objectHit.t;
                 hit = objectHit;

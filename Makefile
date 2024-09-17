@@ -3,7 +3,7 @@ DIR = .
 OUTPUT_DIR = $(DIR)/build
 BINARY = $(OUTPUT_DIR)/RachitTracer
 STD = c++20
-FILES = $(DIR)/$(wildcard *.cpp)
+FILES = $(DIR)/$(wildcard *.cpp) $(DIR)/$(wildcard */*.cpp)
 INCLUDE_DIR = $(DIR)/include
 LIB_DIR = $(DIR)/lib
 LIB_FLAGS = -lSDL2-2.0.0 -lSDL2 -lSDL2main -lSDL2_image
@@ -14,3 +14,4 @@ all:
 clean:
 	@rm $(BINARY)
 	@rm *.png
+	@rm *.ini

@@ -5,8 +5,6 @@
 #include "Ray.hpp"
 
 class Camera {
-private:
-
 public:
     Vector3 origin;
     Vector3 lowerLeftCorner;

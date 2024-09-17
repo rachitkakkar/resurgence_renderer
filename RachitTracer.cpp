@@ -7,6 +7,9 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_sdl2.h"
+#include "imgui/imgui_impl_sdlrenderer2.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb/stb_image.h>
 #define STB_IMAGE_WRITE_IMPLEMENTATION
@@ -50,17 +53,8 @@ void updateProgressBar(int progress, int total, double elapsedSeconds)
     std::cout.flush();
 }
 
-bool hitSphere(const Vector3& center, double radius, const Ray& ray) {
-    Vector3 sphereToRay = ray.origin - center;
-    double a = ray.direction.dot(ray.direction);
-    double b = 2.0 * sphereToRay.dot(ray.direction);
-    double c = sphereToRay.dot(sphereToRay) - radius*radius;
-    double discriminant = b * b - 4 * a * c;
-    return (discriminant > 0);
-}
-
 Vector3 rayColor(const Ray& ray, const Scene& world) {
-    Hit hit = world.hit(ray, 0.0, std::numeric_limits<double>::infinity());
+    Hit hit = world.hit(ray, Interval(0, INFINITY_));
     if (hit.occured)
         return 0.5 * (hit.normal + Vector3(1.0, 1.0, 1.0));
     Vector3 unitDirection = ray.direction.normalize();
@@ -71,13 +65,13 @@ Vector3 rayColor(const Ray& ray, const Scene& world) {
 int main(int argc, char* argv[])
 {
     // Image
-    const float aspectRatio = 16.0f / 9.0f; 
+    const float aspectRatio = 16.0f / 9.0f;
     const int imageWidth = 1000;
     const int imageHeight = (int)(imageWidth / aspectRatio);
     std::string imageName = argv[1];
 
     unsigned char pixels[imageWidth * imageHeight * 3];
-    const int samplesPerPixel = 500;
+    const int samplesPerPixel = 8;
     int pixelIndex = 0;
     
     // Camera
@@ -112,9 +106,10 @@ int main(int argc, char* argv[])
             double g = color.y * scale;
             double b = color.z * scale;
 
-            pixels[pixelIndex++] = (unsigned char)(256 * clamp(r, 0.0, 0.999));
-            pixels[pixelIndex++] = (unsigned char)(256 * clamp(g, 0.0, 0.999));
-            pixels[pixelIndex++] = (unsigned char)(256 * clamp(b, 0.0, 0.999));
+            static const Interval intensity(0.0f, 0.999f); 
+            pixels[pixelIndex++] = (unsigned char)(256 * intensity.clamp(r));
+            pixels[pixelIndex++] = (unsigned char)(256 * intensity.clamp(g));
+            pixels[pixelIndex++] = (unsigned char)(256 * intensity.clamp(b));
         }
     }
     
@@ -125,8 +120,17 @@ int main(int argc, char* argv[])
     IMG_Init(IMG_INIT_PNG);
 
     // Create a window
-    SDL_Window* window = SDL_CreateWindow(("[IMAGE PREVIEW] - " + imageName).c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, imageWidth, imageHeight, SDL_WINDOW_SHOWN);
+    SDL_Window* window = SDL_CreateWindow("RachitTracer", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, imageWidth, imageHeight, SDL_WINDOW_SHOWN);
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+    // Initalize ImGui
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
+    ImGui_ImplSDLRenderer2_Init(renderer);
+
+    ImGui::StyleColorsClassic();
 
     // Load the PNG image
     SDL_Surface* imageSurface = IMG_Load(imageName.c_str());
@@ -139,28 +143,48 @@ int main(int argc, char* argv[])
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, imageSurface);
     SDL_FreeSurface(imageSurface);
 
-    // Clear the renderer
-    SDL_RenderClear(renderer);
-
-    // Render the texture onto the window's surface
-    SDL_RenderCopy(renderer, texture, NULL, NULL);
-
-    // Update the screen
-    SDL_RenderPresent(renderer);
-
     // Event loop
     SDL_Event event;
     int quit = 0;
     while (!quit) {
         while (SDL_PollEvent(&event)) {
+            ImGui_ImplSDL2_ProcessEvent(&event);
             if (event.type == SDL_QUIT) {
                 quit = 1;
             }
         }
+
+        ImGui_ImplSDLRenderer2_NewFrame();
+        ImGui_ImplSDL2_NewFrame();
+        ImGui::NewFrame();
+
+        // ImGui::Begin("Hello, Dear ImGui with SDL2");
+        // ImGui::Text("This is just a basic Hello World!");
+        // ImGui::End();
+        ImGui::Begin("Scene Configurator");
+        ImGui::End();
+        ImGui::Render();
+    
+        // Clear the renderer
+        SDL_RenderClear(renderer);
+
+        SDL_SetRenderDrawColor(renderer, 9, 20, 230, 255);
+
+        // Render the texture onto the window's surface
+        SDL_RenderCopy(renderer, texture, NULL, NULL);
+
+        ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData(), renderer);
+
+        // Update the screen
+        SDL_RenderPresent(renderer);
     }
 
     // Clean up resources
-    SDL_DestroyTexture(texture);
+    ImGui_ImplSDLRenderer2_Shutdown();
+    ImGui_ImplSDL2_Shutdown();
+    ImGui::DestroyContext();
+
+    // SDL_DestroyTexture(texture);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
 
